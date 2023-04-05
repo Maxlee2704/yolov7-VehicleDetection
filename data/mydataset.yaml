@@ -1,0 +1,4 @@
+train: ../train_data/Data/train
+val: ../train_data/Data/train
+nc: 6
+names: ['Motorbike','Car','Walker','Bike','Truck','Bus']
