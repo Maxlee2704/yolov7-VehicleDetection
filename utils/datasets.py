@@ -20,6 +20,10 @@ from PIL import Image, ExifTags
 from torch.utils.data import Dataset
 from tqdm import tqdm
 
+from prefilter import *
+from keras.models import load_model
+import tensorflow as tf
+
 import pickle
 from copy import deepcopy
 #from pycocotools import mask as maskUtils
@@ -29,7 +33,9 @@ from torchvision.ops import roi_pool, roi_align, ps_roi_pool, ps_roi_align
 from utils.general import check_requirements, xyxy2xywh, xywh2xyxy, xywhn2xyxy, xyn2xy, segment2box, segments2boxes, \
     resample_segments, clean_str
 from utils.torch_utils import torch_distributed_zero_first
-
+# Pre-prediction
+model = load_model('D:/YOLOv7_Vehicle/Predetection/Train.h5')
+label = ["Dark","Haze","Ok"]
 # Parameters
 help_url = 'https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data'
 img_formats = ['bmp', 'jpg', 'jpeg', 'png', 'tif', 'tiff', 'dng', 'webp', 'mpo']  # acceptable image suffixes
@@ -184,6 +190,29 @@ class LoadImages:  # for inference
             # Read image
             self.count += 1
             img0 = cv2.imread(path)  # BGR
+            #print('test0',img0)
+            img_test = np.expand_dims(img0, axis=0)
+            result = model(img_test)
+            i = np.argmax(result)
+            print('Pre_detection: ', label[i])
+            #Dark
+            if i == 0:
+                #pass
+                img0 = addbright(img0)*255
+                #print('test1',img0)
+                img0 = np.uint8(img0)
+
+            #Haze
+            if i == 1:
+                #pass
+                img0 = dehaze(img0)
+                #img0 = np.uint8(img0)
+            #Ok
+            else: img0 = img0
+
+
+
+
             assert img0 is not None, 'Image Not Found ' + path
             #print(f'image {self.count}/{self.nf} {path}: ', end='')
 
