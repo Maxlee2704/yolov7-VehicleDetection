@@ -127,7 +127,8 @@ def detect(save_img=False):
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
-
+                        # Improve ảnh trùng
+                        
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
 
@@ -166,7 +167,7 @@ def detect(save_img=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', nargs='+', type=str, default='weight/exp31/weights/best.pt', help='model.pt path(s)')
-    parser.add_argument('--source', type=str, default=r'D:\BKU\Monhoc\222\project2\Dataset\Data\test', help='source')  # file/folder, 0 for webcam
+    parser.add_argument('--source', type=str, default=r'D:\BKU\Monhoc\222\project2\Dataset\Data\test\Test02171.png', help='source')  # file/folder, 0 for webcam
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.25, help='object confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.45, help='IOU threshold for NMS')

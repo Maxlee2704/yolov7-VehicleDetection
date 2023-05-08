@@ -204,8 +204,8 @@ class LoadImages:  # for inference
 
             #Haze
             if i == 1:
-                #pass
-                img0 = dehaze(img0)
+                pass
+                #img0 = dehaze(img0)
                 #img0 = np.uint8(img0)
             #Ok
             else: img0 = img0
