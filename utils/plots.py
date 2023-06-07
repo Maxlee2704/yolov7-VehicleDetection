@@ -88,7 +88,7 @@ def plot_one_box(x, img, color=None, label=None, line_thickness=3):
 
     if label:
         typeVehicle = label[:-4]
-        print(typeVehicle)
+        #print(typeVehicle)
         d = distance(FOCAL, typeVehicle, height)
         tf = max(tl - 1, 1)  # font thickness
         t_size = cv2.getTextSize(label, 0, fontScale=tl / 3, thickness=tf)[0]

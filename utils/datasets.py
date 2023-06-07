@@ -197,10 +197,10 @@ class LoadImages:  # for inference
             print('Pre_detection: ', label[i])
             #Dark
             if i == 0:
-                #pass
-                img0 = addbright(img0)*255
+                pass
+                #img0 = addbright(img0)*255
                 #print('test1',img0)
-                img0 = np.uint8(img0)
+                #img0 = np.uint8(img0)
 
             #Haze
             if i == 1:

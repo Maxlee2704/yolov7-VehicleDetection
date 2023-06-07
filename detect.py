@@ -89,7 +89,7 @@ def detect(save_img=False):
 
         # Apply NMS
         pred = non_max_suppression(pred, opt.conf_thres, opt.iou_thres, classes=opt.classes, agnostic=opt.agnostic_nms)
-        print(pred)
+        #print(pred)
         t3 = time_synchronized()
 
         # Apply Classifier
@@ -166,9 +166,9 @@ def detect(save_img=False):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default='weight/exp31/weights/best.pt', help='model.pt path(s)')
-    parser.add_argument('--source', type=str, default=r'D:\BKU\Monhoc\222\t2.jpg', help='source')  # file/folder, 0 for webcam
-    parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
+    parser.add_argument('--weights', nargs='+', type=str, default='weight/exp34/best.pt', help='model.pt path(s)')
+    parser.add_argument('--source', type=str, default=r'D:\BKU\Monhoc\222\project2\video_test\Test_weather.mp4', help='source')  # file/folder, 0 for webcam
+    parser.add_argument('--img-size', type=int, default=1280, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.25, help='object confidence threshold')
     parser.add_argument('--iou-thres', type=float, default=0.45, help='IOU threshold for NMS')
     parser.add_argument('--device', default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
@@ -181,7 +181,7 @@ if __name__ == '__main__':
     parser.add_argument('--augment', action='store_true', help='augmented inference')
     parser.add_argument('--update', action='store_true', help='update all models')
     parser.add_argument('--project', default='runs/detect', help='save results to project/name')
-    parser.add_argument('--name', default='exp', help='save results to project/name')
+    parser.add_argument('--name', default='No_filter', help='save results to project/name')
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
     parser.add_argument('--no-trace', action='store_true', help='don`t trace model')
     opt = parser.parse_args()

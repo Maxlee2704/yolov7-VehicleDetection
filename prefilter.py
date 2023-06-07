@@ -1,8 +1,8 @@
 import image_dehazer
 import cv2
 import numpy as np
-import scipy
-
+from scipy import special
+import matplotlib.pyplot as plt
 
 def dehaze(img):
     HazeCorrectedImg = image_dehazer.remove_haze(img)
@@ -17,9 +17,9 @@ def addbright(img):
     I3 = (I1 + I2) / (lamda + (I1 * I2))
     I4 = np.zeros_like(I3)
     z = (lamda * np.arctan(np.exp(I3)) - 0.5 * I3)
-    I4 = scipy.special.erf(z)
+    I4 = special.erf(z)
     I5 = (I4 - np.min(I4)) / (np.max(I4) - np.min(I4))
-    return I5
+    return I1,I2,I3,I4,I5
 
 def Clights_dt(img):
     img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -32,6 +32,4 @@ def Clights_dt(img):
         x, y, w, h = cv2.boundingRect(cnt[i])
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
     return img
-if __name__=='__main__':
-    PATH = r'D:\BKU\Monhoc\222\project2\Dataset\Data\test\thi-tran-tam-dao-mo-ao-nhu-tien-canh-4-15415176-17135577.webp'
-    img = cv2.imread(PATH)
+
