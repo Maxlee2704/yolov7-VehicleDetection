@@ -1,0 +1,4 @@
+train: /kaggle/input/dataset/Data/train
+val: /kaggle/input/dataset/Data/val
+nc: 6
+names: ['Motorbike','Car','Walker','Bike','Truck','Bus']
